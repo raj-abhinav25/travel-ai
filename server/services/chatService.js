@@ -5,8 +5,7 @@ function extractFromMessage(message) {
   const destinations = [
   'goa', 'delhi', 'rajgir', 'nalanda', 'mumbai', 
   'jaipur', 'kerala', 'shimla', 'manali', 'agra', 
-  'varanasi', 'kolkata'  // ✅ newly added
-];
+  'varanasi', 'kolkata'];
   let destination = null;
   for (const place of destinations) {
     if (msg.includes(place)) {

@@ -1,0 +1,200 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: var(--glass-bg-heavy);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 1000;
+  animation: fadeInDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6);
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.navbar-logo:hover { opacity: 0.8; }
+
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-accent), #ff6b81);
+  color: white;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.logo-text {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+/* Nav Links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.nav-link.active {
+  color: var(--color-accent);
+  background: rgba(233, 69, 96, 0.08);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .nav-link.active {
+  background: rgba(255, 107, 129, 0.1);
+}
+
+.nav-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-light);
+  margin: 0 var(--space-3);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: var(--space-1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle-track {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: var(--surface-active);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  transition: background var(--transition-base);
+}
+
+[data-theme="dark"] .theme-toggle-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-icon {
+  color: var(--text-tertiary);
+  z-index: 1;
+  transition: color var(--transition-base);
+}
+
+.sun-icon { color: #f59e0b; }
+
+[data-theme="dark"] .moon-icon { color: #818cf8; }
+
+.theme-toggle-thumb {
+  position: absolute;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform var(--transition-slow);
+}
+
+.theme-toggle-thumb.dark {
+  transform: translateX(22px);
+}
+
+/* Hamburger */
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  padding: var(--space-2);
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .navbar-toggle { display: block; }
+
+  .navbar-links {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--glass-bg-heavy);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    flex-direction: column;
+    padding: var(--space-4) var(--space-6);
+    gap: var(--space-2);
+    border-bottom: 1px solid var(--border-subtle);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition-slow);
+  }
+
+  .navbar-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .nav-divider {
+    width: 100%;
+    height: 1px;
+    margin: var(--space-2) 0;
+  }
+}

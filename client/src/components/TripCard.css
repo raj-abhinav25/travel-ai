@@ -1,0 +1,120 @@
+.trip-card {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: 1px solid var(--border-subtle);
+}
+
+.trip-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--border-light);
+}
+
+.trip-card-image {
+  position: relative;
+  height: 170px;
+  overflow: hidden;
+}
+
+.trip-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trip-card:hover .trip-card-image img {
+  transform: scale(1.06);
+}
+
+.trip-card-overlay {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+}
+
+.trip-style-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: capitalize;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trip-card-content {
+  padding: var(--space-4) var(--space-5);
+}
+
+.trip-destination {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: capitalize;
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+}
+
+.trip-details {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.trip-detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.trip-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.trip-date {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.trip-delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  display: flex;
+  opacity: 0;
+}
+
+.trip-card:hover .trip-delete-btn {
+  opacity: 1;
+}
+
+.trip-delete-btn:hover {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+@media (max-width: 768px) {
+  .trip-card-image { height: 150px; }
+  .trip-card-content { padding: var(--space-3) var(--space-4); }
+  .trip-card-footer { padding: var(--space-3) var(--space-4); }
+  .trip-delete-btn { opacity: 1; }
+}

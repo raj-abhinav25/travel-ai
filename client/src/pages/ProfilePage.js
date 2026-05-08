@@ -24,6 +24,28 @@ const ProfilePage = ({ addToast }) => {
     } catch (e) {
       console.error("Failed to parse profile", e);
     }
+
+    // Then fetch fresh data from backend
+    const fetchProfile = async () => {
+      const userId = localStorage.getItem("wanderai_userId");
+      if (!userId) return;
+      try {
+        const response = await fetch(`http://localhost:5000/auth/user/${userId}`);
+        if (response.ok) {
+          const profileData = await response.json();
+          const newProfile = {
+            name: profileData.name,
+            email: profileData.email,
+            photoUrl: profileData.photoUrl || ""
+          };
+          setProfile(newProfile);
+          localStorage.setItem("wanderai_profile", JSON.stringify(newProfile));
+        }
+      } catch (e) {
+        console.error("Failed to fetch user profile", e);
+      }
+    };
+    fetchProfile();
   }, []);
 
   const handleChange = (e) => {
@@ -48,9 +70,20 @@ const ProfilePage = ({ addToast }) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call to save profile
     try {
-      await new Promise(resolve => setTimeout(resolve, 800));
+      const userId = localStorage.getItem("wanderai_userId");
+      if (userId) {
+        await fetch('http://localhost:5000/auth/user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId,
+            name: profile.name,
+            email: profile.email,
+            photoUrl: profile.photoUrl
+          })
+        });
+      }
       localStorage.setItem("wanderai_profile", JSON.stringify(profile));
       addToast("Profile updated successfully!", "success");
       setIsEditing(false);

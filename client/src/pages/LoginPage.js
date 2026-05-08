@@ -74,6 +74,21 @@ const LoginPage = ({ addToast }) => {
       localStorage.setItem('wanderai_token', token);
       localStorage.setItem('wanderai_userId', user.uid);
 
+      // Fetch user profile from backend
+      try {
+        const response = await fetch(`http://localhost:5000/auth/user/${user.uid}`);
+        if (response.ok) {
+          const profileData = await response.json();
+          localStorage.setItem("wanderai_profile", JSON.stringify({
+            name: profileData.name,
+            email: profileData.email,
+            photoUrl: profileData.photoUrl || ""
+          }));
+        }
+      } catch (e) {
+        console.error("Failed to fetch user profile", e);
+      }
+
       if (addToast) addToast("Welcome back! Redirecting...", "success");
 
       setTimeout(() => {

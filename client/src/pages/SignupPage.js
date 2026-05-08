@@ -95,6 +95,21 @@ const SignupPage = ({ addToast }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
       
+      // Save user to backend
+      try {
+        await fetch('http://localhost:5000/auth/user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: userCredential.user.uid,
+            name: formData.fullName,
+            email: formData.email
+          })
+        });
+      } catch (e) {
+        console.error("Failed to save user to Cloudant", e);
+      }
+
       // Store initial profile data for the UI
       localStorage.setItem("wanderai_profile", JSON.stringify({
         name: formData.fullName,

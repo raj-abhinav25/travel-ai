@@ -63,7 +63,7 @@ const ChatPage = ({ addToast }) => {
       const res = await fetch(`${API_BASE}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, userId: "user_demo_123" }),
+        body: JSON.stringify({ message: text, userId: localStorage.getItem('wanderai_userId') }),
       });
 
       if (!res.ok) throw new Error(`Server error: ${res.status}`);

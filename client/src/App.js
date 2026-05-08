@@ -1,12 +1,24 @@
 import React, { useState, useCallback } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import ChatPage from "./pages/ChatPage";
 import SavedTripsPage from "./pages/SavedTripsPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import ProfilePage from "./pages/ProfilePage";
 import Toast from "./components/Toast";
 import "./App.css";
+
+// Component to protect routes that require authentication
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("wanderai_token");
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
 
 function App() {
   const [toasts, setToasts] = useState([]);
@@ -30,9 +42,38 @@ function App() {
           <Navbar />
           <main className="main-content">
             <Routes>
+              {/* Home — public landing page */}
               <Route path="/" element={<LandingPage addToast={addToast} />} />
-              <Route path="/chat" element={<ChatPage addToast={addToast} />} />
-              <Route path="/saved" element={<SavedTripsPage addToast={addToast} />} />
+
+              {/* Auth pages — public */}
+              <Route path="/login" element={<LoginPage addToast={addToast} />} />
+              <Route path="/signup" element={<SignupPage addToast={addToast} />} />
+
+              {/* Protected pages — require login */}
+              <Route
+                path="/chat"
+                element={
+                  <ProtectedRoute>
+                    <ChatPage addToast={addToast} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/saved"
+                element={
+                  <ProtectedRoute>
+                    <SavedTripsPage addToast={addToast} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfilePage addToast={addToast} />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </main>
           <div className="toast-container">

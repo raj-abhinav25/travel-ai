@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Search, ArrowRight, Sparkles, Brain, PiggyBank, Lightbulb, Mountain, Palmtree, Landmark } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Search, ArrowRight, Sparkles, Brain, PiggyBank, Lightbulb, Mountain, Palmtree, Landmark, LogIn, UserPlus } from "lucide-react";
 import "./LandingPage.css";
 
 const LandingPage = ({ addToast }) => {
   const [query, setQuery] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("");
   const navigate = useNavigate();
+  const isLoggedIn = !!localStorage.getItem("wanderai_token");
 
   const travelStyles = [
     { key: "adventure", label: "Adventure", icon: <Mountain size={16} /> },
@@ -98,6 +99,20 @@ const LandingPage = ({ addToast }) => {
               </button>
             ))}
           </div>
+
+          {/* Auth CTA — only shown if not logged in */}
+          {!isLoggedIn && (
+            <div className="hero-auth-cta animate-fade-in-up delay-5" id="hero-auth-cta">
+              <Link to="/signup" className="hero-cta-btn hero-cta-primary" id="hero-signup-btn">
+                <UserPlus size={18} />
+                Get Started Free
+              </Link>
+              <Link to="/login" className="hero-cta-btn hero-cta-secondary" id="hero-login-btn">
+                <LogIn size={18} />
+                Log In
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="hero-scroll-indicator animate-fade-in delay-5">

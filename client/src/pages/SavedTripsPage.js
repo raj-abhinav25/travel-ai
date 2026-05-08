@@ -19,7 +19,7 @@ const SavedTripsPage = ({ addToast }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_BASE}/trip/user/user_demo_123`);
+      const res = await fetch(`${API_BASE}/trip/user/${localStorage.getItem('wanderai_userId')}`);
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const data = await res.json();
       setTrips(Array.isArray(data) ? data : data.trips || []);

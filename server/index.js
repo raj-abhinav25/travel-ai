@@ -45,3 +45,7 @@ app.listen(PORT, () => {
 // Chat route
 const chatRoutes = require('./routes/chatRoutes');
 app.use('/chat', chatRoutes);
+
+// Auth routes
+const authRoutes = require('./routes/authRoutes');
+app.use('/auth', authRoutes);

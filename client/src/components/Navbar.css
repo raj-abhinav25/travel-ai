@@ -159,6 +159,101 @@
   z-index: 1001;
 }
 
+/* ===== AUTH BUTTONS IN NAVBAR ===== */
+.nav-auth-btns {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav-login-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav-signup-btn {
+  display: flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  background: linear-gradient(135deg, #e94560, #ff6b81);
+  color: white !important;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.25);
+}
+
+.nav-signup-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(233, 69, 96, 0.35);
+}
+
+/* ===== USER SECTION (logged in) ===== */
+.nav-user-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav-avatar-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.nav-avatar-link.active,
+.nav-avatar-link:hover {
+  outline-color: var(--color-accent);
+}
+
+.nav-avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-light);
+}
+
+.nav-avatar-placeholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-accent), #ff6b81);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.nav-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  border-radius: var(--radius-lg);
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.nav-logout-btn:hover {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .navbar-toggle { display: block; }
@@ -197,4 +292,26 @@
     height: 1px;
     margin: var(--space-2) 0;
   }
+
+  .nav-auth-btns {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-login-link {
+    width: 100%;
+  }
+
+  .nav-signup-btn {
+    width: 100%;
+    justify-content: center;
+    padding: var(--space-3) var(--space-5);
+  }
+
+  .nav-user-section {
+    width: 100%;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-4);
+  }
 }
+

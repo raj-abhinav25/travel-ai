@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 import { AlertTriangle, X } from "lucide-react";
 import "./ConfirmModal.css";
 
@@ -14,7 +15,7 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, title, message }) => {
 
   if (!isOpen) return null;
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-glass" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Close">
@@ -37,7 +38,8 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, title, message }) => {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

@@ -26,7 +26,10 @@ async function getTripsByUser(userId) {
   try {
     const response = await client.postFind({
       db: TRIPS_DB,
-      selector: { userId: userId },
+      selector: { 
+        userId: userId,
+        createdAt: { "$gt": 0 }
+      },
       sort: [{ createdAt: 'desc' }],
       useIndex: 'userId-createdAt-index' // ✅ updated index name
     });

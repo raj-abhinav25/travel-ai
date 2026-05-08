@@ -57,12 +57,17 @@ const ProfilePage = ({ addToast }) => {
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Create a local object URL for preview
-      // In a real app, this would be uploaded to a server/CDN
-      const photoUrl = URL.createObjectURL(file);
-      setProfile(prev => ({ ...prev, photoUrl }));
-      setIsEditing(true);
-      addToast("Photo updated! Don't forget to save.", "info");
+      if (file.size > 1024 * 1024) {
+        if (addToast) addToast("Image must be smaller than 1MB", "error");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfile(prev => ({ ...prev, photoUrl: reader.result }));
+        setIsEditing(true);
+        if (addToast) addToast("Photo updated! Don't forget to save.", "info");
+      };
+      reader.readAsDataURL(file);
     }
   };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, AlertCircle, LogIn } from "lucide-react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
@@ -7,6 +7,7 @@ import "./AuthPages.css";
 
 const LoginPage = ({ addToast }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -92,7 +93,11 @@ const LoginPage = ({ addToast }) => {
       if (addToast) addToast("Welcome back! Redirecting...", "success");
 
       setTimeout(() => {
-        navigate("/chat");
+        // Redirect to the page they tried to visit before login, or default to /chat
+        const from = location.state?.from?.pathname || "/chat";
+        // Also preserve any state (like search queries from LandingPage)
+        const preservedState = location.state?.from?.state;
+        navigate(from, { state: preservedState });
       }, 600);
 
     } catch (err) {

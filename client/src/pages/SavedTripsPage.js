@@ -66,9 +66,10 @@ const SavedTripsPage = ({ addToast }) => {
   };
 
   const handleTripClick = (trip) => {
-    navigate("/chat", {
-      state: { tripData: trip.tripData || trip },
-    });
+    const tripId = trip._id || trip.id;
+    if (tripId) {
+      navigate(`/trip/${tripId}`);
+    }
   };
 
   const destination = deleteTarget?.tripData?.destination || deleteTarget?.destination || "this trip";

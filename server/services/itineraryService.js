@@ -9,6 +9,11 @@ const destinationData = {
     relaxed: ["Lodhi Garden morning walk", "Coffee at Hauz Khas Village", "India Gate evening stroll"],
     cultural: ["Red Fort tour", "Qutub Minar visit", "Humayun's Tomb exploration"]
   },
+  jaipur: {
+    adventure: ["Hot air balloon ride", "Cycling to Nahargarh Fort", "Jhalana leopard safari"],
+    relaxed: ["Sunset view from Nahargarh", "Cafe hopping in C-Scheme", "Chokhi Dhani evening experience"],
+    cultural: ["Amber Fort elephant ride", "Hawa Mahal visit", "City Palace exploration"]
+  },
   rajgir: {
     adventure: ["Ropeway to Ratnagiri Hills", "Nature safari", "Cycling through Rajgir forests"],
     relaxed: ["Hot springs visit", "Peaceful walk at Venu Vana", "Sunset at Gridhakuta Hill"],
@@ -43,6 +48,16 @@ const destinationData = {
     adventure: ["Street food trail through North Kolkata", "Cycling through heritage areas", "River cruise on Hooghly"],
     relaxed: ["Victoria Memorial gardens", "Coffee at College Street", "Evening at Park Street"],
     cultural: ["Victoria Memorial visit", "Dakshineswar Kali Temple", "Indian Museum exploration"]
+  },
+  mumbai: {
+    adventure: ["Sailing at Gateway of India", "Cycling in Sanjay Gandhi National Park", "Street food tour in Mohammad Ali Road"],
+    relaxed: ["Evening walk at Marine Drive", "Cafe hopping in Bandra", "Sunset at Juhu Beach"],
+    cultural: ["Elephanta Caves ferry tour", "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya visit", "Heritage walk in Fort area"]
+  },
+  kerala: {
+    adventure: ["Trekking in Munnar tea estates", "Bamboo rafting in Periyar", "Surfing in Varkala"],
+    relaxed: ["Houseboat cruise in Alleppey", "Ayurvedic spa session", "Sunset at Marari Beach"],
+    cultural: ["Kathakali performance in Kochi", "Fort Kochi heritage walk", "Spice plantation tour in Thekkady"]
   }
 };
 

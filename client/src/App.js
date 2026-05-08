@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
@@ -8,14 +8,16 @@ import SavedTripsPage from "./pages/SavedTripsPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
+import TripDetailsPage from "./pages/TripDetailsPage";
 import Toast from "./components/Toast";
 import "./App.css";
 
 // Component to protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("wanderai_token");
+  const location = useLocation();
   if (!token) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children;
 };
@@ -71,6 +73,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <ProfilePage addToast={addToast} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/trip/:tripId"
+                element={
+                  <ProtectedRoute>
+                    <TripDetailsPage addToast={addToast} />
                   </ProtectedRoute>
                 }
               />
